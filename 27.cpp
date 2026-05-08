@@ -18,6 +18,7 @@ class Solution
                 head++;
             }
         }
+        cout << "test" << endl;
         return head;
     }
 };
