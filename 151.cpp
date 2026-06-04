@@ -42,7 +42,7 @@ class Solution
         }
         // 反转每个单词
         int num = 0; // 空格和空格之间有几个单词
-        for (int i=0; i<s.size()+1; i++)
+        for (int i=0; i<s.size()+1; i++) // s.size就是字符串的长度，s[s.size()]是'\0'
         {         
             if (s[i] == ' ' || s[i] == '\0') // a ko kopafj
             {
