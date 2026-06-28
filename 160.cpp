@@ -6,8 +6,9 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
-public:
+class Solution
+{
+  public:
     int get_length(ListNode *arg)
     {
         int count = 0;
@@ -19,53 +20,34 @@ public:
         }
         return count;
     }
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        int length_headA = get_length(headA);
-        int length_headB = get_length(headB);
-        ListNode *cur_headA = headA;
-        ListNode *cur_headB = headB;
-        ListNode *target = nullptr;
-        int sap = length_headB - length_headA;
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
+    {
+        if (headA == nullptr || headB == nullptr)   return nullptr;
+        int len_A = get_length(headA);
+        int len_B = get_length(headB);
+        int sap = len_A - len_B;
+        ListNode *temp_headA = headA;
+        ListNode *temp_headB = headB;
         if (sap < 0)
         {
-            sap = (-sap);
-            for (int i=0; i<sap; i++)
-                cur_headA = cur_headA->next;
-            // cout << "===" << cur_headA->val << endl;
-            while (cur_headA)
-            {
-                // cout << "===" << cur_headA->val << endl;
-                // cout << "===" << cur_headB->val << endl; 
-                cout << "===" << cur_headA->val << " "<< cur_headB->val <<endl;
-                if (cur_headA == cur_headB)
-                {
-                    target = cur_headA;
-                    return target;
-                }
-                cur_headA = cur_headA->next;
-                cur_headB = cur_headB->next;
-            }
-            return nullptr;
+            std::swap(temp_headA, temp_headB);
+            sap = len_B - len_A;
         }
-        else if (sap >= 0)
+        while (sap)
         {
-            for (int i=0; i<sap; i++)
-                cur_headB = cur_headB->next;
-            // cout << "===" << cur_headB->val << endl;
-            while (cur_headB)
-            {
-                // cout << "===" << cur_headA->val << " "<< cur_headB->val <<endl;
-                // cout << "===" << cur_headB->val << endl;              
-                if (cur_headB == cur_headA)
-                {
-                    target = cur_headB;
-                    return target;
-                }
-                cur_headA = cur_headA->next;
-                cur_headB = cur_headB->next;
-            }
-            return nullptr;
+            temp_headA = temp_headA->next;
+            sap --;
         }
-        return target;
+        cout << temp_headA->val << endl;
+        while (temp_headA)
+        {
+            if (temp_headA == temp_headB)
+            {
+                return temp_headA;
+            }
+            temp_headA = temp_headA->next;
+            temp_headB = temp_headB->next;
+        }
+        return nullptr;
     }
 };

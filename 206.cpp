@@ -15,16 +15,15 @@ public:
     {
        ListNode *dummy = new ListNode(0, head);
        ListNode *temp = nullptr;
-       ListNode *cur  = dummy->next;  // 头节点
+       ListNode *cur  = head->next;  // 头节点
+       head->next = nullptr;
        while (cur)
        {
-            temp = cur->next;     // 2
+            temp = cur->next;         // 2
             cur->next = dummy->next;
-            head->next = nullptr; 
             dummy->next = cur;
             cur = temp;
             showList(dummy);
-            puts();
        }
        temp = dummy->next;
        delete dummy;
